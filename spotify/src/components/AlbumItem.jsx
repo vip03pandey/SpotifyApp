@@ -12,3 +12,5 @@ const AlbumItem = ({image,name,desc,id}) => {
 }
 
 export default AlbumItem
+
+
