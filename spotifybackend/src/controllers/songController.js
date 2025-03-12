@@ -6,12 +6,19 @@ const addSong = async (req, res) => {
         const { name, desc, album } = req.body;
         const audioFile = req.files?.audio?.[0];
         const imageFile = req.files?.image?.[0];
-        if (!name || !desc || !album || !audioFile || !imageFile) {
+        // console.log('Name:', name);
+        // console.log('Desc:', desc);
+        // console.log('Album:', album);
+        // console.log('Image:', imageFile);
+        // console.log('Audio:', audioFile);
+
+        
+        if (!name || !desc ||  !album?.trim() || !req.files?.image || !req.files?.audio) {
             return res.status(400).json({
                 success: false,
                 message: "All fields (name, desc, album, image, audio) are required."
             });
-        }
+        }        
         const audioUpload = await cloudinary.uploader.upload(audioFile.path, { resource_type: "video" });
         const imageUpload = await cloudinary.uploader.upload(imageFile.path, { resource_type: "image" });
 
